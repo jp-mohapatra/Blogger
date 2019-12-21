@@ -44,7 +44,7 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-gem 'sprockets', '3.6.3'
+gem 'sprockets', '3.7.2'
 gem 'twitter-bootswatch-rails', '~> 3.3.4'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'devise'
