@@ -1,0 +1,74 @@
+<style type="text/css">
+.blog-row{ 
+    margin-bottom:10px;
+     }
+
+
+</style>
+
+
+
+    
+
+
+<section id="blog">
+      <div class="container">
+           
+            <div class="row">
+                    <h2 align="center"><span class="ion-minus"></span>Blog Posts<span class="ion-minus"></span></h2>
+                    <p></p><br>
+            </div>  
+                
+           <div class="row">
+             
+                        
+            
+                            
+                      
+             <!-- Carousel items -->
+             <div class="carousel-inner">
+                    
+                <div class="item active">
+                    <div class="row">
+                    <%@blogs.each do |blog|%>
+                    <%if blog.is_approve?%>
+                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 blog-row">
+                         <div class="card text-center">
+                         <div class="picture">
+                            <% if blog.photos.present? %>
+                            <%= image_tag blog.photos.first.photo.url(:medium)%>
+                            <%else%>
+                            <%= image_tag('ImageNotAvailable', size: "150x150")%>
+                            <%end%>
+                         </div>
+                          
+                            <!-- <img class="card-img-top" src="https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?h=350&auto=compress&cs=tinysrgb" alt="" width="100%"> -->
+                            <div class="card-block">
+                                <h4 class="card-title"><%= blog.title%></h4>
+                                <div class="card-text"><%= simple_format(blog.description)%></div>
+                                
+                            </div>
+             <%= link_to "Read More","/blog_details?id=#{blog.id}", class: "btn btn-default", style: "border-radius:5px" %>
+                         </div>
+                      </div>
+                    <%end%>
+                    <%end%>
+                      
+                        
+                    </div> <!-- row -->
+                </div> <!-- item -->
+                 
+                 
+                 </div>
+            </div>
+            
+        </div>
+    </section>
+    
+     
+    
+   
+
+    
+        
+   

@@ -1,0 +1,86 @@
+<div class="span8">
+	
+    <h1><%= @blog.title %></h1>
+    <h5><%= @blog.created_at.strftime("%dth %b,%Y") %></h5><br/>
+    <p><%= simple_format(@blog.description)%></p><br/>
+    <div>
+        <span class="badge badge-success">Posted by <%=@blog.user.name%></span>
+        <div class="pull-right"><span class="label">alice</span> <span class="label">story</span> <span class="label">blog</span> <span class="label">personal</span></div>
+    </div><br/>
+ 
+    <div id="comments"><%= render :partial => "shared/comments"%></div>
+</div>
+
+
+<!-- Modal -->
+<div class="container">
+ 
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+    
+        <div class="modal-body " id="modal_body">
+          <h2>Add Comment</h2><br/>
+          <%@comment = Comment.new%>
+          <%= form_for @comment, url: {action: "add_comment", :controller => 'comments'}, html: { :id => "comment_form",multipart: true, remote: true} do |f| %>
+          <%= f.hidden_field :blog_id,:value => @blog.id %>
+          <%= f.label :comment_comment, "Comment" %>
+          <%= f.text_area :comment, class: "quill_container form-control"%><br/>
+          <%if user_signed_in?%>
+          <%= hidden_field_tag "comment[created_by]",current_user.name, class: 'form-control', :required => true %>
+          <%end%>
+          <%= f.submit "Comment",class: 'btn btn-primary'  %>
+          <button type="button" class="btn btn-cancel" data-dismiss="modal">Cancel</button>
+          <%end%>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#comment_form').bind('ajax:success', function(evt, data, status, xhr){
+      
+      $("#myModal").modal('hide');
+       
+     $("#comments").html(data);
+      //window.location.href ="/tasks";
+      });
+
+$("#myModal").on("hidden.bs.modal", function(){
+    $("#myModal")
+});
+
+});
+
+function clear_form(){
+  $("#comment_form")[0].reset();
+}
+
+
+
+ 
+
+
+
+
+
+    
+</script>
+
+<style type="text/css">
+.ql-editor{
+
+  height:200px;
+}
+</style>

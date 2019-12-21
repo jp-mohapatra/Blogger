@@ -1,0 +1,42 @@
+<!-- Comments -->
+    <div class="container">
+	<div class="row">
+		<%if user_signed_in?%>
+		<h3>Comments(<%= @comments.count%>) <div class="pull-right"><a href="#" id="addacomment" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModal" onclick="clear_form()">Add comment</a> </div></h3>
+		<%else%>
+		<h2>Comments(<%= @comments.count%>) <div class="pull-right"><%= link_to "Add comment",new_session_path(:user),class: "btn btn-info btn-lg pull-right" %></div></h2>
+		<%end%>
+	</div>
+	<%if @comments.blank?%>
+	<br/><br/>
+	<h4 align="center">No comments found!!</h4>
+	<%else%>
+	<hr>
+	<div class="row comment">
+		<%@comments.each do |comment|%>
+	    <div class="head">
+	    	
+	        <h4><strong class='user'><%= comment.created_by %></strong></h4>
+	        
+	        <%if comment.created_at.today? %>
+	        <p><%= time_ago_in_words(comment.created_at) %> ago</p
+	        	>
+	        
+	        <%else%>
+	          
+	          <%= comment.created_at %>
+	          
+	        <%end%>
+	      
+
+	    </div>    
+	    <p><font size="4px"><%= simple_format(comment.comment) %></font></p>
+
+	    </div>
+	    <hr>
+	    <%end%>
+	    <%end%>
+	
+</div>
+
+

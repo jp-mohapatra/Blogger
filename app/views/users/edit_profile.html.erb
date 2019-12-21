@@ -1,0 +1,83 @@
+
+<div class="col-sm-6" style="margin-left:300px">
+ <div class="span3 well">
+   <legend>Edit Profile</legend>
+
+<%= form_for @user, url:{:action => 'update'}  do |f| %>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="field">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, class: 'form-control', placeholder: "full name", autofocus: true,  :required => true %>
+      </div>
+    </div>
+  </div><br/>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: 'form-control' , placeholder: "enter email", autofocus: true, readonly: true %>
+      </div>
+     </div>
+  </div><br/>
+  
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="field">
+        <b>Gender:</b><br>
+        <%= f.radio_button :gender, 'male' %> 
+        <%= f.label :gender, 'Male' %>
+        <%= f.radio_button :gender, 'female' %>
+        <%= f.label :gender, 'Female' %>
+      </div>
+     </div>
+  </div><br/>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="field">
+        <%= f.label :dob %><br />
+        <%= f.text_field :dob,  class: 'form-control', placeholder: "contact number", autofocus: true %>
+      </div>
+     </div>
+  </div><br/>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="field">
+        <%= f.label :is_admin %> <br />
+        <%= f.check_box :is_admin %> <br />
+      </div>
+     </div>
+  </div><br/>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="field">
+        <%= f.label :address %><br />
+        <%= f.text_area :address, class: 'form-control', autofocus: true %>
+      </div><br />
+     </div>
+  </div><br/>
+
+  <div class="actions">
+    <%= f.submit "Save Changes", class: 'btn btn-warning' %>
+   <%= link_to "Cancel",{:action => "profile"}, class: "btn btn-secondary" %>
+  </div><br />
+
+    
+
+<% end %>
+
+ </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+   $("#user_dob").datepicker();
+
+</script>

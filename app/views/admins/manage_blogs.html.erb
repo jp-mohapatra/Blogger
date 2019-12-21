@@ -1,0 +1,83 @@
+<style>
+ .truncate{
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td:nth-child(2){
+  width: 600px;
+}
+</style>
+<div class="span7">   
+<div class="widget stacked widget-table action-table">
+            
+        <div class="widget-header">
+          <i class="icon-th-list"></i>
+        </div> <!-- /widget-header -->
+        
+        <div class="widget-content">
+        
+          <table class="table table-striped table-bordered display blog-list" >
+            <thead>
+
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Owner Name</th>
+                <th></th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <%@blogs.each do |blog| %>
+              <tr>
+                <td><%= blog.title %></td>
+                <td>
+
+                  <div class="truncate">
+                  <%= simple_format (blog.description) %>
+                  </div>
+                  
+                </td>
+                
+                <td><%= (blog.user).name unless blog.user.nil?%></td>
+                <td>
+                  <%if blog.is_approve?%>
+                  <%= link_to "Disapprove",{:action => 'approve',:id => blog.id}, class: 'btn btn-danger', method: :put, remote: true, id: "disapprove", onclick:"javascript:change(this)" %>
+                  <%else%>
+                  <%= link_to "Approve",{:action => 'approve',:id => blog.id}, class: 'btn btn-primary', method: :put, remote: true, id: "approve", onclick:"javascript:change(this)" %>
+                  <%end%>
+                </td>
+
+              </tr>
+              <% end %>
+              </tbody>
+            </table><br/><br/>
+        
+          
+        </div> <!-- /widget-content -->
+      
+  </div> <!-- /widget -->
+</div>
+
+
+
+<script type="text/javascript">
+    $('.blog-list').DataTable({
+      "ordering": false
+    });
+
+function change(val) {
+  if (val.text == "Disapprove"){
+    val.text = "Approve";
+    $(val).removeClass("btn btn-danger");
+    $(val).addClass("btn btn-primary");}
+  else{
+    val.text = "Disapprove";
+    $(val).removeClass("btn btn-primary");
+    $(val).addClass("btn btn-danger");}
+    
+}
+ 
+</script>

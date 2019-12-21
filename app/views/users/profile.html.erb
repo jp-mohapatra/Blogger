@@ -1,0 +1,41 @@
+<div class="container">    
+    <div class="row">
+    <div class="panel panel-default">
+    <div class="panel-heading"><h4 >User Profile</h4></div>
+        <div class="panel-body">
+            <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" width="150px" height="150px"> 
+                     
+                 
+            </div>
+            <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                <div class="container" >
+                    <h2><%= @user.name %></h2>
+                </div>
+                    <hr>
+                    <ul class="container details">
+
+                      <% if @user.is_admin==true %>
+                      <li><p><span style="width:50px;"><b>User type: </b></span>Admin</p></li>
+                      <% else %>
+                      <li><p><span  style="width:50px;"><b>User type: </b></span>User</p></li>
+                       <% end %>
+
+                      <li><p><span style="width:50px;"><b>Email: </b></span><%= @user.email %></p></li>
+
+                      <%if @user.gender=="female"%>
+                      <li><p><span class="" style="width:50px;"><b>Gender: </b></span><%= @user.gender %></p></li>
+                      <%else%>
+                      <li><p><span class="" style="width:50px;"><b>Gender: </b></span><%= @user.gender %></p></li>
+                      <%end%>
+                       <li><p><span style="width:50px;"><b>D.O.B:  </b></span><%= @user.dob %></p></li>
+                       <li><p><span style="width:50px;"><b>Address:  </b></span><%= @user.address %></p></li>
+                      
+                    </ul>
+                    <hr>
+                    <%= link_to 'edit profile', {:action => 'edit_profile'}, class: "btn btn-info" %>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
